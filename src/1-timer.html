@@ -4,12 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/1-timer.css" />
     <title>Page 2</title>
   </head>
   <body>
-    <section>
+    <section class="box">
       <a href="./index.html">Go to home</a>
-      <h1>Welcome to page 2</h1>
     </section>
+    <section class="timer-box box">
+      <input class="input-text" type="text" id="datetime-picker" />
+      <button class="timer-btn" type="button" data-start>Start</button>
+      
+      <div class="timer">
+        <div class="field">
+          <span class="value" data-days>00</span>
+          <span class="label">Days</span>
+        </div>
+        <div class="field">
+          <span class="value" data-hours>00</span>
+          <span class="label">Hours</span>
+        </div>
+        <div class="field">
+          <span class="value" data-minutes>00</span>
+          <span class="label">Minutes</span>
+        </div>
+        <div class="field">
+          <span class="value" data-seconds>00</span>
+          <span class="label">Seconds</span>
+        </div>
+      </div>
+
+    </section>
+    <script src="./js/1-timer.js" type="module"></script>
   </body>
 </html>
