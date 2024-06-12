@@ -1,7 +1,9 @@
-// Описаний в документації
+
 import flatpickr from "flatpickr";
-// Додатковий імпорт стилів
 import "flatpickr/dist/flatpickr.min.css";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+import iconLink from '../img/alert-icon.svg';
 
 const startBtn = document.querySelector("[data-start]");
     const dateTimePicker = document.querySelector("#datetime-picker");
@@ -11,8 +13,8 @@ const startBtn = document.querySelector("[data-start]");
     const secondsValue = document.querySelector("[data-seconds]");
 
     let intervalID;
-    let userSelectedDate;
-
+let userSelectedDate;
+startBtn.disabled = true;
     const options = {
       enableTime: true,
       time_24hr: true,
@@ -21,7 +23,18 @@ const startBtn = document.querySelector("[data-start]");
       onClose(selectedDates) {
         userSelectedDate = selectedDates[0];
         if (userSelectedDate < new Date()) {
-          window.alert("Please choose a date in the future");
+          iziToast.error({
+              message: 'Please choose a date in the future',
+              messageSize: '16px',
+              messageColor: '#fff',
+              backgroundColor: '#ef4040',
+              position: "topRight",
+              close: true,
+              iconUrl: iconLink,
+              iconColor: '#FAFAFB',
+
+
+});
           startBtn.disabled = true;
         } else {
           startBtn.disabled = false;
@@ -68,11 +81,14 @@ const startBtn = document.querySelector("[data-start]");
 
       return { days, hours, minutes, seconds };
     }
-function updateTimerDisplay({ days, hours, minutes, seconds }) {
-    const timeLeft = convertMs(userSelectedDate);
-    daysValue.textContent = timeLeft.days.toString().padStart(2, '0');
-    hoursValue.textContent = timeLeft.hours.toString().padStart(2, '0');
-    minutesValue.textContent = timeLeft.minutes.toString().padStart(2, '0');
-    secondsValue.textContent = timeLeft.seconds.toString().padStart(2, '0');
+    
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+}
 
+function updateTimerDisplay({ days, hours, minutes, seconds }) {
+  daysValue.textContent = addLeadingZero(days);
+  hoursValue.textContent = addLeadingZero(hours);
+  minutesValue.textContent = addLeadingZero(minutes);
+  secondsValue.textContent = addLeadingZero(seconds);
 }
